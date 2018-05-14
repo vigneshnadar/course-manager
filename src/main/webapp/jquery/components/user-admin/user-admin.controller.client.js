@@ -6,7 +6,9 @@
     jQuery(main)
 
     var template;
-    var tbody
+    var tbody;
+
+    var userService = new UserServiceClient();
 
     function main() {
 
@@ -16,6 +18,11 @@
 
         $('#createUser').click(createUser);
 
+        findAllUsers();
+
+    }
+
+    function findAllUsers() {
         var promise = fetch('http://localhost:8080/api/user');
 
         promise.then(function (response) {
@@ -40,13 +47,12 @@
             lastName : lastName
         };
 
-        fetch('http://localhost:8080/api/user', {
-            method : 'post',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+
+        userService
+            .createUser(user)
+            .then(findAllUsers);
+
+
     }
 
     function renderUsers(users) {
