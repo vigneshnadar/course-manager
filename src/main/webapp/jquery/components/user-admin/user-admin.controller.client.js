@@ -5,15 +5,40 @@
 
     jQuery(main)
 
+    var template;
+    var tbody
+
     function main() {
-       var h1 = jQuery('h1')
-       h1.css('color','red')
 
-        var tr = $('.template');
-        var tr1 = tr.clone();
 
-        var tbody = $('tbody')
-        tbody.append(tr1)
+        tbody = $('tbody');
+        template = $('.template');
+
+        var promise = fetch('http://localhost:8080/api/user');
+
+        promise.then(function (response) {
+            return response.json();
+        }).then(renderUsers);
+
+    }
+
+    function renderUsers(users) {
+
+        for(var i=0;i<users.length;i++){
+            var user = users[i];
+
+            var clone = template.clone();
+
+            clone.find('.username')
+                .html(user.username);
+
+            tbody.append(clone);
+
+
+
+
+        }
+
 
     }
 
