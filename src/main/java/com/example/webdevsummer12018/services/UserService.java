@@ -1,6 +1,7 @@
 package com.example.webdevsummer12018.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,16 @@ public class UserService {
 	@DeleteMapping("/api/user/{userId}")
 	public void deleteUser(@PathVariable("userId") int id) {
 		repository.deleteById(id);
+	}
+	
+	
+	@GetMapping("/api/user/{userId}")
+	public User findUserById(@PathVariable("userId") int id) {
+		Optional<User> data = repository.findById(id);
+		if(data.isPresent()) {
+			return data.get();
+		}
+		return null;
 	}
 	
 	@GetMapping("/api/user")
