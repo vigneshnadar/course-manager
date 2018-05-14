@@ -60,5 +60,11 @@ public class UserService {
 	public User createUser(@RequestBody User user) {
 		return repository.save(user);
 	}
+	
+	
+	@PostMapping("/api/login")
+	public List<User>  login(@RequestBody User user) {
+		return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
+	}
 
 }
