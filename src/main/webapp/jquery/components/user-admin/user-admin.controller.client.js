@@ -23,11 +23,9 @@
     }
 
     function findAllUsers() {
-        var promise = fetch('http://localhost:8080/api/user');
-
-        promise.then(function (response) {
-            return response.json();
-        }).then(renderUsers);
+        userService
+            .findAllUsers()
+             .then(renderUsers);
 
     }
 
@@ -57,21 +55,41 @@
 
     function renderUsers(users) {
 
+        tbody.empty();
+
         for(var i=0;i<users.length;i++){
             var user = users[i];
 
             var clone = template.clone();
 
+            clone.attr('id',user.id);
+
+            clone.find('.delete').click(deleteUser);
+            clone.find('.edit').click(editUser);
+
             clone.find('.username')
                 .html(user.username);
 
             tbody.append(clone);
-
-
-
-
         }
+    }
 
+
+    function deleteUser(event) {
+
+        var deleteBtn = $(event.currentTarget);
+        var userId = deleteBtn.parent().parent().attr('id');
+
+        console.log(userId);
+
+        userService
+            .deleteUser(userId)
+            .then(findAllUsers);
+
+    }
+
+    function editUser(event) {
+        console.log('edit');
 
     }
 
