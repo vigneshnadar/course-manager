@@ -15,6 +15,7 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private String role;
 	
 	public int getId() {
 		return id;
@@ -24,6 +25,12 @@ public class User {
 	}
 	public String getUsername() {
 		return username;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public void setUsername(String username) {
 		this.username = username;

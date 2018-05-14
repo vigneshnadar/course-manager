@@ -29,29 +29,29 @@
 <th><input id="lastnameField" class="form-control" placeholder="Doe"/></th>
     <th><select id="roleField" class="form-control">
         <option value="FACULTY">Faculty</option>
-        <option value="STUDENT">Student</option>
+        <option value="STUDENT" selected="selected">Student</option>
     </select>
     </th>
-<th><button id="createUser" class="btn btn-success">Create</button></th>
-    <td><span class="float-left" style="white-space: nowrap">
-        <i class="fa-2x fa fa-search user-search"></i>
-        <i class="fa-2x fa fa-plus user-create"></i>
-        <i class="fa-2x fa fa-check user-update"></i>
+<td><span class="float-right" style="white-space: nowrap">
+        <a id="searchUser"> <i  class="fa-2x fa fa-search user-search"></i></a>
+    <a id="createUser"><i class="fa-2x fa fa-plus user-create"></i></a>
+    <a id="updateUser"> <i class="fa-2x fa fa-check user-update"></i></a>
     </span></td>
 </tr>
+<!--<button id="createUser" class="btn btn-success">Create</button></th>-->
 </thead>
 <tbody>
 <tr class="template">
 <td class="username">vignesh2992</td>
 <td>****</td>
-<td>Vignesh</td>
-<td>Nadar</td>
-    <td>STUDENT</td>
-<td><button class="delete btn btn-danger">Delete</button></td>
-    <td><button class="edit btn btn-danger">Edit</button></td>
+<td class="firstname">Vignesh</td>
+<td class="lastname">Nadar</td>
+    <td class="role">STUDENT</td>
+<!--<td><button class="delete btn btn-danger">Delete</button></td>-->
+    <!--<td><button class="edit btn btn-danger">Edit</button></td>-->
     <td><span class="float-left" style="white-space: nowrap">
-        <i id="user-delete" class="fa-2x fa fa-times user-delete"></i>
-        <i id="user-edit" class="fa-2x fa fa-pencil user-edit"></i>
+        <a class="delete"> <i id="user-delete" class="fa-2x fa fa-times user-delete"></i></a>
+        <a class="edit">  <i id="user-edit" class="fa-2x fa fa-pencil user-edit"></i></a>
     </span></td>
 </tr>
 

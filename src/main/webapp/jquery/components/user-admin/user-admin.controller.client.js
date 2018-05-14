@@ -37,13 +37,17 @@
         var password = $('#passwordField').val();
         var firstName = $('#firstnameField').val();
         var lastName = $('#lastnameField').val();
+        var role = $('#roleField').val();
 
         var user = {
              username : username,
              password : password,
             firstName : firstName,
-            lastName : lastName
+            lastName : lastName,
+            role: role
         };
+
+        console.log(user);
 
 
         userService
@@ -69,6 +73,12 @@
 
             clone.find('.username')
                 .html(user.username);
+            clone.find('.firstname')
+                .html(user.firstName);
+            clone.find('.lastname')
+                .html(user.lastName);
+            clone.find('.role')
+                .html(user.role);
 
             tbody.append(clone);
         }
@@ -78,7 +88,7 @@
     function deleteUser(event) {
 
         var deleteBtn = $(event.currentTarget);
-        var userId = deleteBtn.parent().parent().attr('id');
+        var userId = deleteBtn.parent().parent().parent().attr('id');
 
         console.log(userId);
 
