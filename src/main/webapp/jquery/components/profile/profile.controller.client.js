@@ -3,8 +3,10 @@
     $(init);
 
     var $staticEmail;
-    var $firstName;
-    var $lastName;
+    var $username;
+    var $phone;
+    var $role;
+    var $dob;
     var $updateBtn;
 
     var userService = new UserServiceClient();
@@ -12,9 +14,12 @@
     function init() {
 
          $staticEmail =$("#staticEmail");
-         $firstName=$("#firstName");
-         $lastName=$("#lastName");
-        $updateBtn=$("#updateBtn")
+         $username=$("#username");
+         $phone=$("#phone");
+         $role=$("#roleField");
+         $dob=$("#dob");
+
+            $("#updateBtn")
             .click(updateUser);
 
         findUserById(12);
@@ -23,9 +28,14 @@
     
     function updateUser() {
         var user = {
-            firstName: $firstName.val(),
-            lastName: $lastName.val()
+            username: $username.val(),
+            phone: $phone.val(),
+            role: $role.val(),
+            // dateOfBirth: $dob.val(),
+            email:$staticEmail.val()
         }
+
+        console.log(user);
 
         userService
             .updateUser(12, user)
@@ -51,9 +61,9 @@
     function renderUser(user) {
         console.log(user);
         // $staticEmail.val(user.email);
-        $staticEmail.val("xyz@gmail.com");
-        $firstName.val(user.firstName);
-        $lastName.val(user.lastName);
+        $staticEmail.val(user.email);
+        $username.val(user.username);
+        $phone.val(user.phone);
 
     }
 

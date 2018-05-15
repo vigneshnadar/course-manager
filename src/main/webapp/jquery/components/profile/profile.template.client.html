@@ -5,6 +5,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <title>Insert title here</title>
 
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+    <script src="../../services/user.service.client.js"></script>
+    <script src="profile.controller.client.js"></script>
+
 </head>
 <body>
 
@@ -12,38 +20,53 @@
     <h1>Profile</h1>
 
     <form>
+
+        <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="john2992"></div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="(617)-xxx-xxxx">
+        </div>
+
         <div class="form-group">
             <label for="staticEmail">Email address</label>
             <input type="email" class="form-control" id="staticEmail" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <select id="roleField" class="form-control">
+                <option value="FACULTY">Faculty</option>
+                <option value="STUDENT" selected="selected">Student</option>
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="John">
-        </div>
+            <label for="dob">Date of Birth</label>
+
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input id="dob" type='text' class="form-control" />
+                                <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <!--<script type="text/javascript">-->
+                        <!--$(function () {-->
+                            <!--$('#datetimepicker1').datetimepicker();-->
+                        <!--});-->
+                    <!--</script>-->
+                </div>
+            </div>
 
 
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Doe">
-        </div>
 
-        <button type="button" id="updateBtn" class="btn btn-primary btn-block">Update</button>
+
+        <button type="button" id="updateBtn" class="btn btn-success btn-block">Update</button>
+        <button type="button" id="logoutBtn" class="btn btn-danger btn-block">Logout</button>
     </form>
 
 </div>
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
 
-<script src="../../services/user.service.client.js"></script>
-<script src="profile.controller.client.js"></script>
 
 </body>
 </html>

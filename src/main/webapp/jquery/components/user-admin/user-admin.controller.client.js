@@ -113,14 +113,14 @@
 
         var selectedUser = userService
                             .findUserById(userId)
-                            .then(setUserFields);
+                            .then(renderUser);
         console.log(selectedUser);
 
 
 
     }
 
-    function setUserFields(selectedUser) {
+    function renderUser(selectedUser) {
         $('#usernameField').val(selectedUser.username);
         $('#passwordField').val(selectedUser.password);
         $('#firstnameField').val(selectedUser.firstName);

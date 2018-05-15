@@ -34,11 +34,21 @@ public class UserService {
 		Optional<User> data = repository.findById(userId);
 		if(data.isPresent()) {
 			User user = data.get();
-			user.setUsername(newUser.getUsername());
-			user.setFirstName(newUser.getFirstName());
-			user.setLastName(newUser.getLastName());
-			user.setRole(newUser.getRole());
-			System.out.println(newUser.getFirstName());
+			if(newUser.getUsername() !=null) user.setUsername(newUser.getUsername());
+			
+			if(newUser.getFirstName() !=null) user.setFirstName(newUser.getFirstName());
+			
+			if(newUser.getLastName() !=null) user.setLastName(newUser.getLastName());
+			
+			if(newUser.getRole() !=null) user.setRole(newUser.getRole());
+			
+			if(newUser.getEmail() !=null) user.setEmail(newUser.getEmail());
+			
+			if(newUser.getPhone() !=null) user.setPhone(newUser.getPhone());
+			
+			if(newUser.getDateOfBirth() != null) user.setDateOfBirth(newUser.getDateOfBirth());
+			
+//			System.out.println(newUser.getFirstName());
 			repository.save(user);
 			return user;
 		}
