@@ -7,6 +7,7 @@
 
     var template;
     var tbody;
+    var selectedUserId;
 
     var userService = new UserServiceClient();
 
@@ -16,7 +17,9 @@
         tbody = $('tbody');
         template = $('.template');
 
+
         $('#createUser').click(createUser);
+        $('#updateUser').click(updateUser);
 
         findAllUsers();
 
@@ -92,6 +95,7 @@
 
         console.log(userId);
 
+
         userService
             .deleteUser(userId)
             .then(findAllUsers);
@@ -101,6 +105,63 @@
     function editUser(event) {
         console.log('edit');
 
+        var editBtn = $(event.currentTarget);
+        var userId = editBtn.parent().parent().parent().attr('id');
+        selectedUserId=userId;
+
+        console.log(userId);
+
+        var selectedUser = userService
+                            .findUserById(userId)
+                            .then(setUserFields);
+        console.log(selectedUser);
+
+
+
+    }
+
+    function setUserFields(selectedUser) {
+        $('#usernameField').val(selectedUser.username);
+        $('#passwordField').val(selectedUser.password);
+        $('#firstnameField').val(selectedUser.firstName);
+        $('#lastnameField').val(selectedUser.lastName);
+        $('#roleField').val(selectedUser.role);
+
+    }
+
+
+    function updateUser() {
+        var username = $('#usernameField').val();
+        var password = $('#passwordField').val();
+        var firstName = $('#firstnameField').val();
+        var lastName = $('#lastnameField').val();
+        var role = $('#roleField').val();
+        var userId = selectedUserId;
+        console.log(userId);
+
+        var user = {
+            username : username,
+            password : password,
+            firstName : firstName,
+            lastName : lastName,
+            role: role
+        };
+
+        console.log(user);
+
+
+
+        userService
+            .updateUser(userId, user)
+            .then(findAllUsers);
+    }
+
+    function success(response) {
+        if(response == null){
+            alert('failure');
+        }
+
+        alert('success');
     }
 
 })();
