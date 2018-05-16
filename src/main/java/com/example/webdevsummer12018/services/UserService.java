@@ -75,6 +75,15 @@ public class UserService {
 		return repository.save(user);
 	}
 	
+	@PostMapping("/api/register")
+	public User register(@RequestBody User user) {
+		User u = (User) repository.findUserByUsername(user.getUsername());
+		if(u==null) return repository.save(user);
+		
+		return null;
+		
+	}
+	
 	
 	@PostMapping("/api/login")
 	public List<User>  login(@RequestBody User user) {

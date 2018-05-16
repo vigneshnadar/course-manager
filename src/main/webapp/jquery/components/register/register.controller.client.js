@@ -1,7 +1,7 @@
 (function () {
     var $username, $pwd, $verifypwd;
     var $registerBtn;
-    var userService = new UserService();
+    var userService = new UserServiceClient();
     $(main);
 
     function main() {
@@ -9,10 +9,9 @@
         $username =$("#username");
         $pwd=$("#pwd");
         $verifypwd=$("#v-pwd");
-        $registerBtn=$("#registerBtn");
         $dob=$("#dob");
 
-        $("#registerBtn")
+        $("#signUpBtn")
             .click(register);
 
         // findUserById(12);
