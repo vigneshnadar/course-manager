@@ -102,6 +102,12 @@
 
     }
 
+    function findUserById(userId) {
+        var selectedUser = userService
+            .findUserById(userId)
+            .then(renderUser);
+    }
+
     function editUser(event) {
         console.log('edit');
 
@@ -111,9 +117,10 @@
 
         console.log(userId);
 
-        var selectedUser = userService
-                            .findUserById(userId)
-                            .then(renderUser);
+        // var selectedUser = userService
+        //                     .findUserById(userId)
+        //                     .then(renderUser);
+        findUserById(userId);
         console.log(selectedUser);
 
 
