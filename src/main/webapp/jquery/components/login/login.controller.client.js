@@ -7,9 +7,8 @@
     function main() {
 
         $username =$("#username");
-        $pwd=$("#pwd");
-        $verifypwd=$("#v-pwd");
-        $dob=$("#dob");
+        $pwd=$("#password");
+
 
         $("#loginBtn")
             .click(login);
@@ -19,9 +18,11 @@
 
 
     function login() {
+
+        console.log("inside login");
         var user = {
             username: $username.val(),
-            password: $password.val()
+            password: $pwd.val()
         }
 
         console.log(user);
@@ -31,8 +32,15 @@
             .then(success);
     }
 
-    function success() {
-        alert("success");
+    function success(response) {
+        console.log(response.body);
+        if(response.body){
+            alert("success");
+
+        }
+        else {
+            alert("failure");
+        }
     }
 
 
