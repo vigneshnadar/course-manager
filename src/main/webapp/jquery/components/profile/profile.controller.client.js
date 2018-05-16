@@ -20,25 +20,25 @@
          $dob=$("#dob");
 
             $("#updateBtn")
-            .click(updateUser);
+            .click(updateProfile);
 
-        findUserById(12);
+        findUserById(222);
     }
     
     
-    function updateUser() {
+    function updateProfile() {
         var user = {
             username: $username.val(),
             phone: $phone.val(),
             role: $role.val(),
-            // dateOfBirth: $dob.val(),
+            dateOfBirth: $dob.val(),
             email:$staticEmail.val()
         }
 
         console.log(user);
 
         userService
-            .updateUser(12, user)
+            .updateUser(222, user)
             .then(success);
     }
 
@@ -47,7 +47,7 @@
             alert('failure');
         }
 
-        alert('success');
+        else alert('success');
     }
 
 
