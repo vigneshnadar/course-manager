@@ -3,6 +3,7 @@ package com.example.webdevsummer12018.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ public class UserService {
 		System.out.println("updateProfile");
 		System.out.println(s.getUsername());
 		int userId = s.getId();
+		System.out.println(userId);
 		Optional<User> data = repository.findById(userId);
 		if(data.isPresent()) {
 			User user = data.get();
@@ -113,14 +115,25 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/register")
-	public User register(@RequestBody User user, HttpSession session) {
+	public User register(@RequestBody User user, HttpSession session, HttpServletResponse response) {
 		session.setAttribute("currentUser", user);
 		User s = (User) session.getAttribute("currentUser");
 		System.out.println(s);
 		System.out.println(s.getUsername());
+		
+		String currentUsername = user.getUsername();
+		// password match fail
+		if(currentUsername.equals("pwdmatchfail")) {
+			response.setStatus(408);
+			return null;
+		}
+		
+		//user does not exist so create the user and return
 		User u = (User) repository.findUserByUsername(user.getUsername());
 		if(u==null) return repository.save(user);
 		
+		//user exists 
+		response.setStatus(409);
 		return null;
 		
 	}

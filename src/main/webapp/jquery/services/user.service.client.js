@@ -96,15 +96,32 @@ function UserServiceClient() {
 
 
     function register(user) {
-        return fetch(self.registerUrl, {
-            method : 'post',
-            body: JSON.stringify(user),
-            // credentials: 'same-origin',
-            headers: {
-                'content-type': 'application/json'
-            },
-            credentials: "same-origin"
-        });
+
+        if(user.password != user.verifypassword) {
+            user.username = 'pwdmatchfail';
+        }
+
+            return fetch(self.registerUrl, {
+                method : 'post',
+                body: JSON.stringify(user),
+                // credentials: 'same-origin',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                credentials: "same-origin"
+            });
+            //     .then(function (response) {
+            //
+            //     return response.json();
+            //     // if(response.bodyUsed){
+            //     //     return response.json();
+            //     // }
+            //     //
+            //     // return null;
+            //
+            // });
+
+
     }
 
 
