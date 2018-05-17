@@ -23,31 +23,42 @@
 
     <form>
 
-        <div class="form-group">
+        <div class="form-group row">
         <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
         <input type="text" class="form-control" id="username" placeholder="john2992"></div>
+        </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
             <input type="text" class="form-control" id="phone" placeholder="(617)-xxx-xxxx">
+            </div>
         </div>
 
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Email address</label>
+            <div class="col-sm-10">
             <input type="email" class="form-control" id="staticEmail" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Role</label>
+            <div class="col-sm-10">
             <select id="roleField" class="form-control">
                 <option value="FACULTY">Faculty</option>
                 <option value="STUDENT" selected="selected">Student</option>
             </select>
+            </div>
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group row">
             <label for="dob" class="col-sm-2 col-form-label">Date of Birth</label>
+            <div class="col-sm-10">
             <input type="date"  id="dob" class="form-control">
+            </div>
         </div>
 
         <!--<div class="form-group">-->
