@@ -63,7 +63,8 @@ public class UserService {
 		
 		User s = (User) session.getAttribute("currentUser");
 		String usr = s.getUsername();
-		
+		System.out.println("updateProfile");
+		System.out.println(s.getUsername());
 		int userId = s.getId();
 		Optional<User> data = repository.findById(userId);
 		if(data.isPresent()) {

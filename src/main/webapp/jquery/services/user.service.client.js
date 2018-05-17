@@ -45,9 +45,11 @@ function UserServiceClient() {
         return fetch(self.url, {
             method : 'post',
             body: JSON.stringify(user),
+            // credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'
-            }
+            },
+            credentials: "same-origin"
         });
     }
 
@@ -56,9 +58,11 @@ function UserServiceClient() {
         return fetch(self.url+'/'+userId, {
             method : 'put',
             body: JSON.stringify(user),
+            // credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'
-            }
+            },
+            credentials: "same-origin"
         }).then(function (response) {
             if(response.bodyUsed){
                 return response.json();
@@ -74,9 +78,12 @@ function UserServiceClient() {
         return fetch(self.profileUrl, {
             method : 'put',
             body: JSON.stringify(user),
+            // credentials: 'same-origin',
             headers: {
-                'content-type': 'application/json'
-            }
+                'content-type': 'application/json',
+
+            },
+            credentials: "same-origin"
         }).then(function (response) {
             if(response.bodyUsed){
                 return response.json();
@@ -92,9 +99,11 @@ function UserServiceClient() {
         return fetch(self.registerUrl, {
             method : 'post',
             body: JSON.stringify(user),
+            // credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'
-            }
+            },
+            credentials: "same-origin"
         });
     }
 
@@ -106,7 +115,8 @@ function UserServiceClient() {
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
-            }
+            },
+            credentials: "same-origin"
         });
     }
 
