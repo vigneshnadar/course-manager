@@ -6,9 +6,13 @@ function UserServiceClient() {
    this.updateUser = updateUser;
    this.register = register;
   this.login = login;
+  this.updateProfile = updateProfile;
+  this.profile =profile;
     this.url = 'http://localhost:8080/api/user';
     this.registerUrl = 'http://localhost:8080/api/register';
     this.logonUrl = 'http://localhost:8080/api/login';
+    this.profileUrl = 'http://localhost:8080/api/profile';
+    this.logoutUrl = 'http://localhost:8080/api/logout';
 //    this.newUrl =
 //        'http://localhost:8080/api/login';
     var self = this;
@@ -66,6 +70,24 @@ function UserServiceClient() {
     }
 
 
+    function updateProfile(user) {
+        return fetch(self.profileUrl, {
+            method : 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function (response) {
+            if(response.bodyUsed){
+                return response.json();
+            }
+
+            return null;
+
+        });
+    }
+
+
     function register(user) {
         return fetch(self.registerUrl, {
             method : 'post',
@@ -87,6 +109,14 @@ function UserServiceClient() {
             }
         });
     }
+
+    function profile() {
+        return fetch(self.profileUrl).then(function (response) {
+            return response.json();
+        });
+    }
+
+
 
 //    function login(username, password) {
 //

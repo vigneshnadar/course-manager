@@ -3,6 +3,8 @@ package com.example.webdevsummer12018.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +57,40 @@ public class UserService {
 		return null;
 	}
 	
+	
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User newUser, HttpSession session) {
+		
+		User s = (User) session.getAttribute("currentUser");
+		String usr = s.getUsername();
+		
+		int userId = s.getId();
+		Optional<User> data = repository.findById(userId);
+		if(data.isPresent()) {
+			User user = data.get();
+			if(newUser.getUsername() !=null) user.setUsername(newUser.getUsername());
+			
+			if(newUser.getFirstName() !=null) user.setFirstName(newUser.getFirstName());
+			
+			if(newUser.getLastName() !=null) user.setLastName(newUser.getLastName());
+			
+			if(newUser.getRole() !=null) user.setRole(newUser.getRole());
+			
+			if(newUser.getEmail() !=null) user.setEmail(newUser.getEmail());
+			
+			if(newUser.getPhone() !=null) user.setPhone(newUser.getPhone());
+			
+			if(newUser.getDateOfBirth() != null) user.setDateOfBirth(newUser.getDateOfBirth());
+			
+//			System.out.println(newUser.getFirstName());
+			repository.save(user);
+			return user;
+		}
+		return null;
+	}
+	
+	
+	
 	@GetMapping("/api/user/{userId}")
 	public User findUserById(@PathVariable("userId") int id) {
 		Optional<User> data = repository.findById(id);
@@ -76,13 +112,25 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/register")
-	public User register(@RequestBody User user) {
+	public User register(@RequestBody User user, HttpSession session) {
+		session.setAttribute("currentUser", user);
+		User s = (User) session.getAttribute("currentUser");
+		System.out.println(s);
+		System.out.println(s.getUsername());
 		User u = (User) repository.findUserByUsername(user.getUsername());
 		if(u==null) return repository.save(user);
 		
 		return null;
 		
 	}
+	
+	
+	@GetMapping("/api/profile")
+	public User profile(HttpSession session) {
+	User currentUser = (User) session.getAttribute("currentUser");	
+	return currentUser;
+	}
+
 	
 	
 	@PostMapping("/api/login")
@@ -92,5 +140,12 @@ public class UserService {
 		
 		return true;
 	}
+	
+	
+	@PostMapping("/api/logout")
+	public void logout(HttpSession session) {
+		session.invalidate();
+	}
+
 
 }

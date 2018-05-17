@@ -11,6 +11,7 @@
 
     var userService = new UserServiceClient();
 
+
     function init() {
 
          $staticEmail =$("#staticEmail");
@@ -19,10 +20,17 @@
          $role=$("#roleField");
          $dob=$("#dob");
 
+         // var currentUser = userService.profile().then(profileUser);
+         // console.log(currentUser);
+
             $("#updateBtn")
             .click(updateProfile);
 
-        findUserById(222);
+        // findUserById(222);
+    }
+
+    function profileUser(user) {
+        return user;
     }
     
     
@@ -37,8 +45,12 @@
 
         console.log(user);
 
+        // userService
+        //     .updateUser(222, user)
+        //     .then(success);
+
         userService
-            .updateUser(222, user)
+            .updateProfile(user)
             .then(success);
     }
 
