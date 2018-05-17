@@ -148,11 +148,16 @@ public class UserService {
 	
 	
 	@PostMapping("/api/login")
-	public boolean  login(@RequestBody User user) {
+	public User login(@RequestBody User user,HttpSession session, HttpServletResponse response) {
 		User u = (User) repository.findUserByCredentials(user.getUsername(), user.getPassword());
-		if(u==null) return false;
+		if(u==null) {
+			response.setStatus(409);
+			return null;
+		}
 		
-		return true;
+		System.out.println(user.getUsername());
+		session.setAttribute("currentUser", user);
+		return user;
 	}
 	
 	

@@ -55,12 +55,12 @@
     }
 
     function success(response) {
-
-        if(response == null){
-            alert('failure');
-        }
-
-        else alert('success');
+            alert("profile updated");
+        // if(response == null){
+        //     alert('failure');
+        // }
+        //
+        // else alert('success');
     }
 
 

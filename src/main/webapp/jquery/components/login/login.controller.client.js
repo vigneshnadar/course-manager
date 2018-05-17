@@ -33,14 +33,9 @@
     }
 
     function success(response) {
-        console.log(response.body);
-        if(response.body){
-            alert("success");
-
-        }
-        else {
-            alert("failure");
-        }
+        console.log(response);
+        if(response.status == 409) alert("username and password do match: login unsuccessfull");
+        else alert("login successful");
     }
 
 
