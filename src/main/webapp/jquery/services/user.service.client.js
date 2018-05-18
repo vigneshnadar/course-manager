@@ -124,10 +124,11 @@ function UserServiceClient() {
                 'content-type': 'application/json'
             },
             credentials: "same-origin"
-        }).then(function (response) {
-            console.log(response);
-            return response.json();
         });
+        //     .then(function (response) {
+        //     console.log(response);
+        //     return response.json();
+        // });
 
     }
 

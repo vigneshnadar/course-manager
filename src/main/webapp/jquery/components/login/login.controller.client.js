@@ -29,10 +29,10 @@
 
         userService
             .login(user)
-            .then(test);
+            .then(success);
     }
 
-    function test(response) {
+    function success(response) {
         console.log(response);
 
         if(response.status == 409) {
