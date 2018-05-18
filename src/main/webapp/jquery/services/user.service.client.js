@@ -8,6 +8,7 @@ function UserServiceClient() {
   this.login = login;
   this.updateProfile = updateProfile;
   this.profile =profile;
+  this.logout =logout;
     this.url = 'http://localhost:8080/api/user';
     this.registerUrl = 'http://localhost:8080/api/register';
     this.logonUrl = 'http://localhost:8080/api/login';
@@ -110,23 +111,12 @@ function UserServiceClient() {
                 },
                 credentials: "same-origin"
             });
-            //     .then(function (response) {
-            //
-            //     return response.json();
-            //     // if(response.bodyUsed){
-            //     //     return response.json();
-            //     // }
-            //     //
-            //     // return null;
-            //
-            // });
-
+            
 
     }
 
 
     function login(user) {
-        console.log(user);
         return fetch(self.logonUrl, {
             method : 'post',
             body: JSON.stringify(user),
@@ -135,6 +125,7 @@ function UserServiceClient() {
             },
             credentials: "same-origin"
         });
+
     }
 
     function profile() {
@@ -144,16 +135,16 @@ function UserServiceClient() {
     }
 
 
+    function logout() {
+        return fetch(self.logoutUrl, {
+            method : 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            credentials: "same-origin"
+        });
 
-//    function login(username, password) {
-//
-//        return fetch(newUrl, {
-//            method : 'post',
-//            body: JSON.stringify({username: username, password:password}),
-//            headers: {
-//                'content-type': 'application/json'
-//            }
-//        });
-//
-//    }
+    }
+
+
 }

@@ -26,6 +26,9 @@
             $("#updateBtn")
             .click(updateProfile);
 
+        $("#logoutBtn")
+            .click(logout);
+
         // findUserById(222);
     }
 
@@ -78,6 +81,20 @@
         $username.val(user.username);
         $phone.val(user.phone);
 
+    }
+
+
+    function logout() {
+
+
+        userService
+            .logout()
+            .then(logoutsuccess);
+    }
+
+    function logoutsuccess() {
+        alert("logoutsuccessful");
+        window.location.href="../login/login.template.client.html";
     }
 
 })();

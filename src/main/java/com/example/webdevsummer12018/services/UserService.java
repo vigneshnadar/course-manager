@@ -20,48 +20,51 @@ import com.example.webdevsummer12018.repositories.UserRepository;
 
 @RestController
 public class UserService {
-	
+
 	@Autowired
-	UserRepository repository;	
-	
-	
+	UserRepository repository;
+
 	@DeleteMapping("/api/user/{userId}")
 	public void deleteUser(@PathVariable("userId") int id) {
 		repository.deleteById(id);
 	}
-	
-	
-	
+
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) {
 		Optional<User> data = repository.findById(userId);
-		if(data.isPresent()) {
+		if (data.isPresent()) {
 			User user = data.get();
-			if(newUser.getUsername() !=null) user.setUsername(newUser.getUsername());
-			
-			if(newUser.getFirstName() !=null) user.setFirstName(newUser.getFirstName());
-			
-			if(newUser.getLastName() !=null) user.setLastName(newUser.getLastName());
-			
-			if(newUser.getRole() !=null) user.setRole(newUser.getRole());
-			
-			if(newUser.getEmail() !=null) user.setEmail(newUser.getEmail());
-			
-			if(newUser.getPhone() !=null) user.setPhone(newUser.getPhone());
-			
-			if(newUser.getDateOfBirth() != null) user.setDateOfBirth(newUser.getDateOfBirth());
-			
-//			System.out.println(newUser.getFirstName());
+			if (newUser.getUsername() != null)
+				user.setUsername(newUser.getUsername());
+
+			if (newUser.getFirstName() != null)
+				user.setFirstName(newUser.getFirstName());
+
+			if (newUser.getLastName() != null)
+				user.setLastName(newUser.getLastName());
+
+			if (newUser.getRole() != null)
+				user.setRole(newUser.getRole());
+
+			if (newUser.getEmail() != null)
+				user.setEmail(newUser.getEmail());
+
+			if (newUser.getPhone() != null)
+				user.setPhone(newUser.getPhone());
+
+			if (newUser.getDateOfBirth() != null)
+				user.setDateOfBirth(newUser.getDateOfBirth());
+
+			// System.out.println(newUser.getFirstName());
 			repository.save(user);
 			return user;
 		}
 		return null;
 	}
-	
-	
+
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User newUser, HttpSession session) {
-		
+
 		User s = (User) session.getAttribute("currentUser");
 		String usr = s.getUsername();
 		System.out.println("updateProfile");
@@ -69,102 +72,103 @@ public class UserService {
 		int userId = s.getId();
 		System.out.println(userId);
 		Optional<User> data = repository.findById(userId);
-		if(data.isPresent()) {
+		if (data.isPresent()) {
 			User user = data.get();
-			if(newUser.getUsername() !=null) user.setUsername(newUser.getUsername());
-			
-			if(newUser.getFirstName() !=null) user.setFirstName(newUser.getFirstName());
-			
-			if(newUser.getLastName() !=null) user.setLastName(newUser.getLastName());
-			
-			if(newUser.getRole() !=null) user.setRole(newUser.getRole());
-			
-			if(newUser.getEmail() !=null) user.setEmail(newUser.getEmail());
-			
-			if(newUser.getPhone() !=null) user.setPhone(newUser.getPhone());
-			
-			if(newUser.getDateOfBirth() != null) user.setDateOfBirth(newUser.getDateOfBirth());
-			
-//			System.out.println(newUser.getFirstName());
+			if (newUser.getUsername() != null)
+				user.setUsername(newUser.getUsername());
+
+			if (newUser.getFirstName() != null)
+				user.setFirstName(newUser.getFirstName());
+
+			if (newUser.getLastName() != null)
+				user.setLastName(newUser.getLastName());
+
+			if (newUser.getRole() != null)
+				user.setRole(newUser.getRole());
+
+			if (newUser.getEmail() != null)
+				user.setEmail(newUser.getEmail());
+
+			if (newUser.getPhone() != null)
+				user.setPhone(newUser.getPhone());
+
+			if (newUser.getDateOfBirth() != null)
+				user.setDateOfBirth(newUser.getDateOfBirth());
+
+			// System.out.println(newUser.getFirstName());
 			repository.save(user);
 			return user;
 		}
 		return null;
 	}
-	
-	
-	
+
 	@GetMapping("/api/user/{userId}")
 	public User findUserById(@PathVariable("userId") int id) {
 		Optional<User> data = repository.findById(id);
-		if(data.isPresent()) {
+		if (data.isPresent()) {
 			return data.get();
 		}
 		return null;
 	}
-	
+
 	@GetMapping("/api/user")
 	public List<User> findAllUsers() {
 		return (List<User>) repository.findAll();
 	}
-	
-	
+
 	@PostMapping("/api/user")
 	public User createUser(@RequestBody User user) {
 		return repository.save(user);
 	}
-	
+
 	@PostMapping("/api/register")
 	public User register(@RequestBody User user, HttpSession session, HttpServletResponse response) {
 		session.setAttribute("currentUser", user);
 		User s = (User) session.getAttribute("currentUser");
 		System.out.println(s);
 		System.out.println(s.getUsername());
-		
+
 		String currentUsername = user.getUsername();
 		// password match fail
-		if(currentUsername.equals("pwdmatchfail")) {
+		if (currentUsername.equals("pwdmatchfail")) {
 			response.setStatus(408);
 			return null;
 		}
-		
-		//user does not exist so create the user and return
+
+		// user does not exist so create the user and return
 		User u = (User) repository.findUserByUsername(user.getUsername());
-		if(u==null) return repository.save(user);
-		
-		//user exists 
+		if (u == null)
+			return repository.save(user);
+
+		// user exists
 		response.setStatus(409);
 		return null;
-		
-	}
-	
-	
-	@GetMapping("/api/profile")
-	public User profile(HttpSession session) {
-	User currentUser = (User) session.getAttribute("currentUser");	
-	return currentUser;
+
 	}
 
-	
-	
+	@GetMapping("/api/profile")
+	public User profile(HttpSession session) {
+		User currentUser = (User) session.getAttribute("currentUser");
+		return currentUser;
+	}
+
 	@PostMapping("/api/login")
-	public User login(@RequestBody User user,HttpSession session, HttpServletResponse response) {
+	public User login(@RequestBody User user, HttpSession session, HttpServletResponse response) {
+
 		User u = (User) repository.findUserByCredentials(user.getUsername(), user.getPassword());
-		if(u==null) {
+		if (u == null) {
 			response.setStatus(409);
 			return null;
 		}
-		
-		System.out.println(user.getUsername());
-		session.setAttribute("currentUser", user);
-		return user;
+		session.setAttribute("currentUser", u);
+		System.out.println(u.getUsername());
+
+		return u;
 	}
-	
-	
+
 	@PostMapping("/api/logout")
 	public void logout(HttpSession session) {
 		session.invalidate();
 	}
-
 
 }

@@ -1,5 +1,5 @@
 (function () {
-    var $username, $password;
+    var $username, $pwd;
     var $registerBtn;
     var userService = new UserServiceClient();
     $(main);
@@ -33,9 +33,13 @@
     }
 
     function success(response) {
-        console.log(response);
+        // console.log(response);
+
         if(response.status == 409) alert("username and password do match: login unsuccessfull");
-        else alert("login successful");
+        else {
+            window.location.href="../profile/profile.template.client.html";
+            alert("login successful");
+        }
     }
 
 
