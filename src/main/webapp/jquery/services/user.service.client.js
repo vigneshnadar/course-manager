@@ -129,9 +129,16 @@ function UserServiceClient() {
     }
 
     function profile() {
-        return fetch(self.profileUrl).then(function (response) {
+        return fetch(self.profileUrl,{
+            method: 'get',
+            credentials: "same-origin"
+        }).then(function (response) {
             return response.json();
         });
+        //
+        //         //     .then(function (response) {
+        //         //     return response.json();
+        //         // });
     }
 
 

@@ -20,8 +20,9 @@
          $role=$("#roleField");
          $dob=$("#dob");
 
-         // var currentUser = userService.profile().then(profileUser);
-         // console.log(currentUser);
+         var currentUser = userService.profile().then(profileUser);
+          console.log(currentUser);
+        $("#username").val(currentUser.username);
 
             $("#updateBtn")
             .click(updateProfile);
@@ -33,8 +34,15 @@
     }
 
     function profileUser(user) {
+        console.log(user);
+        $username.val(user.username);
+        $phone.val(user.phone);
+        $role.val(user.role);
+        $dob.val(user.dateOfBirth);
+        $staticEmail.val(user.email);
         return user;
     }
+
     
     
     function updateProfile() {

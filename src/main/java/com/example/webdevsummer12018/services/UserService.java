@@ -148,8 +148,13 @@ public class UserService {
 
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
-		User currentUser = (User) session.getAttribute("currentUser");
-		return currentUser;
+		User u=  (User) session.getAttribute("currentUser");
+//		Optional<User> data = (Optional<User>) session.getAttribute("currentUser");
+//		if (data.isPresent()) {
+//			return data.get();
+//		}
+		return u;
+		
 	}
 
 	@PostMapping("/api/login")
