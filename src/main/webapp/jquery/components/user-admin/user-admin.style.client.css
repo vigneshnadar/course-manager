@@ -1,3 +1,7 @@
 .float-right {
      white-space: nowrap;
  }
+
+body {
+    background-color: white;
+}
