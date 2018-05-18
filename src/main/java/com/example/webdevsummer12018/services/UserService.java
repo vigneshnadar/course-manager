@@ -184,5 +184,6 @@ public class UserService {
 	public void logout(HttpSession session) {
 		session.invalidate();
 	}
+	
 
 }
