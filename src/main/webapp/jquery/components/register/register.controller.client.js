@@ -36,7 +36,10 @@
         console.log(response);
         if(response.status == 408) alert("password does not match");
         else if(response.status == 409) alert("User already exists : registration unsuccessful");
-        else alert("success");
+        else {
+            alert("success");
+            window.location.href="../profile/profile.template.client.html";
+        }
     }
 
 
