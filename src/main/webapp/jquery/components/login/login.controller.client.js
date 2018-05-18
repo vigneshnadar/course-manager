@@ -29,16 +29,19 @@
 
         userService
             .login(user)
-            .then(success);
+            .then(test);
     }
 
-    function success(response) {
-        // console.log(response);
+    function test(response) {
+        console.log(response);
 
-        if(response.status == 409) alert("username and password do match: login unsuccessfull");
+        if(response.status == 409) {
+        	alert(" username and password do match: login unsuccessfull");
+        }
         else {
+        	alert("login successful");
             window.location.href="../profile/profile.template.client.html";
-            alert("login successful");
+            
         }
     }
 

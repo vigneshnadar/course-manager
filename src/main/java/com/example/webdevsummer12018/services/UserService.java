@@ -158,9 +158,13 @@ public class UserService {
 	}
 
 	@PostMapping("/api/login")
-	public User login(@RequestBody User user, HttpSession session, HttpServletResponse response) {
+	public User login(@RequestBody User user, HttpSession session, HttpServletResponse response ) {
 
+		
+			response.setStatus(200);
+		
 		User u = (User) repository.findUserByCredentials(user.getUsername(), user.getPassword());
+		try {
 		if (u == null) {
 			response.setStatus(409);
 			return null;
@@ -168,6 +172,11 @@ public class UserService {
 		session.setAttribute("currentUser", u);
 		System.out.println(u.getUsername());
 
+		
+	}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return u;
 	}
 
